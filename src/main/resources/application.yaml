@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: spring-mongo-migration
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/kitchensinkdb
+      database: kitchensinkdb
+    jackson:
+      serialization:
+        write-dates-as-timestamps: false
