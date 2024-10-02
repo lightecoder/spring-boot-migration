@@ -1,7 +1,7 @@
 package com.spring.mongo.demo.controller;
 
 import com.spring.mongo.demo.entity.Member;
-import com.spring.mongo.demo.service.MemberRegistrationService;
+import com.spring.mongo.demo.service.MemberService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +14,7 @@ import java.util.List;
 public class MemberResourceRESTService {
 
     @Autowired
-    private MemberRegistrationService memberService;
+    private MemberService memberService;
 
     @GetMapping
     public List<Member> listAllMembers() {

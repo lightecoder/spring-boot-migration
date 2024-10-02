@@ -69,6 +69,7 @@ public class MemberControllerTest {
 
         // Assert
         assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response.getBody());
         assertTrue(response.getBody().contains("Unique Email Violation"));
     }
 
@@ -79,6 +80,7 @@ public class MemberControllerTest {
 
         // Assert
         assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response.getBody());
         assertTrue(response.getBody().contains("Member Registration"));
     }
 

@@ -20,9 +20,9 @@ import java.util.*;
 
 
 @Service
-public class MemberRegistrationService {
+public class MemberService {
 
-    private static final Logger log = LoggerFactory.getLogger(MemberRegistrationService.class);
+    private static final Logger log = LoggerFactory.getLogger(MemberService.class);
 
     @Autowired
     private MemberRepository memberRepository;
