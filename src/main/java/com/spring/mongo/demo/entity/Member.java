@@ -20,8 +20,7 @@ public class Member implements Serializable {
     @Pattern(regexp = "[^0-9]*", message = "Must not contain numbers")
     private String name;
 
-    @NotNull
-    @NotEmpty
+    @NotEmpty(message = "Email is required")
     @Email
     @Indexed(unique = true)
     private String email;

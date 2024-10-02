@@ -7,26 +7,79 @@
     <link rel="stylesheet" href="/css/screen.css">
 </head>
 <body>
-<h1>Member Registration</h1>
+<div id="container">
+    <!-- Dual branding section with logo -->
+    <div class="dualbrand">
+        <img src="/gfx/rhjb_eap_logo.png" width="300" height="175" alt="JBoss Logo" />
+    </div>
 
-<div th:if="${message}">
-    <p th:text="${message}" style="color: green;"></p>
+    <!-- Main content area -->
+    <div id="content">
+        <h1>Member Registration</h1>
+
+        <!-- Success and error messages -->
+        <div th:if="${message}">
+            <p th:text="${message}" style="color: green;"></p>
+        </div>
+        <div th:if="${errorMessage}">
+            <p th:text="${errorMessage}" style="color: red;"></p>
+        </div>
+
+        <!-- Registration form -->
+        <form action="#" th:action="@{/members/register}" th:object="${member}" method="post">
+            <label for="name">Name:</label>
+            <input type="text" th:field="*{name}" id="name" /><br />
+            <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="invalid"></span>
+
+            <label for="email">Email:</label>
+            <input type="email" th:field="*{email}" id="email" /><br />
+            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="invalid"></span>
+
+            <label for="phoneNumber">Phone Number:</label>
+            <input type="text" th:field="*{phoneNumber}" id="phoneNumber" /><br />
+            <span th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}" class="invalid"></span>
+
+            <button type="submit">Register</button>
+        </form>
+
+        <!-- Members Table -->
+        <h2>Members</h2>
+        <div th:if="${#lists.isEmpty(members)}">
+            <em>No registered members.</em>
+        </div>
+        <table th:if="${!#lists.isEmpty(members)}" class="simpletablestyle">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone #</th>
+                <th>REST URL</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="member : ${members}">
+                <td th:text="${member.id}"></td>
+                <td th:text="${member.name}"></td>
+                <td th:text="${member.email}"></td>
+                <td th:text="${member.phoneNumber}"></td>
+                <td>
+                    <a th:href="@{/rest/members/{id}(id=${member.id})}">
+                        /rest/members/<span th:text="${member.id}"></span>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="5">
+                    REST URL for all members:
+                    <a th:href="@{/rest/members}">/rest/members</a>
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
 </div>
-<div th:if="${errorMessage}">
-    <p th:text="${errorMessage}" style="color: red;"></p>
-</div>
-
-<form action="#" th:action="@{/members/register}" th:object="${member}" method="post">
-    <label for="name">Name:</label>
-    <input type="text" th:field="*{name}" id="name" /><br />
-
-    <label for="email">Email:</label>
-    <input type="email" th:field="*{email}" id="email" /><br />
-
-    <label for="phoneNumber">Phone Number:</label>
-    <input type="text" th:field="*{phoneNumber}" id="phoneNumber" /><br />
-
-    <button type="submit">Register</button>
-</form>
 </body>
 </html>
